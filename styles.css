@@ -1,9 +1,18 @@
-canvas {
+/* canvas {
   margin: none;
   width: 100vw;
   height: 100vh;
   display: block;
-}
+} */
+
+/* background: linear-gradient(
+    90deg,
+    rgba(123, 193, 255, 0.5),
+    rgba(255, 0, 150, 0)
+  ),
+  linear-gradient(180deg, rgba(255, 123, 137, 0.5), rgba(255, 0, 150, 0)),
+  url(./constellations-2609647_1920.jpg); */
+
 body {
   background: linear-gradient(
       90deg,
@@ -12,6 +21,7 @@ body {
     ),
     linear-gradient(180deg, rgba(255, 123, 137, 0.5), rgba(255, 0, 150, 0)),
     url(https://media2.giphy.com/media/l1Et7Qw1XjvunS0Io/giphy.gif?cid=ecf05e4745kmcd4lo598y4ueo7vtz3acvsmbx3bmmg7oecdt&ep=v1_gifs_search&rid=giphy.gif&ct=g);
+
   background-blend-mode: color;
   background-repeat: no-repeat;
   background-size: cover;
@@ -19,6 +29,7 @@ body {
   display: grid;
   grid-template-columns: repeat(1 1fr);
   justify-items: center;
+  filter: opacity(1);
 }
 h1,
 h2,
@@ -28,9 +39,10 @@ p {
   font-family: "Tektur", cursive;
   filter: drop-shadow(1px 1px 10px rgba(242, 196, 255, 0.2));
   background-color: rgba(0, 255, 242, 0.5);
+  box-shadow: rgba(0, 255, 255) 0 0 0 5px;
   border-radius: 0.2rem;
-  width: 40rem;
-  padding: 1rem 3rem;
+  width: 36rem;
+  padding: 0.5rem 1.5rem;
   text-align: center;
 }
 h4 {
@@ -39,10 +51,11 @@ h4 {
 p {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-img {
-  width: 80%;
+.nasa-img {
+  width: 60%;
   border-radius: 0.3rem;
   border: 50px solid rgba(0, 255, 242, 0.5);
+  box-shadow: rgba(0, 255, 255) 0 0 0 5px;
   filter: drop-shadow(1px 1px 10px rgba(242, 196, 255, 0.2));
   margin: 1rem;
   cursor: pointer;
@@ -53,17 +66,35 @@ div {
 button,
 input {
   background: rgba(0, 255, 242, 0.5);
+  box-shadow: rgba(0, 255, 255) 0 0 0 5px;
+  filter: drop-shadow(1px 1px 10px rgba(242, 196, 255, 0.2));
   border-radius: 0.2rem;
   border: none;
   color: rgb(18, 32, 13);
   font-size: 1.5rem;
-  margin-right: 0.5rem;
+  margin-right: 1.2rem;
   font-family: "Tektur", cursive;
   font-weight: 900;
   cursor: pointer;
+  transition: 0s transform filter;
 }
 button:hover,
 input:hover {
   background: rgba(0, 255, 242);
   filter: brightness(1.5);
+  transform: translateY(0.1rem);
+  transition-delay: 0.2s ease-in;
 }
+
+.loading {
+  display: none;
+  position: fixed;
+  filter: drop-shadow(rgba(0, 149, 255, 0.5) 0 0 5px);
+  top: 60%;
+  left: 32%;
+  width: 30rem;
+  height: 30rem;
+  z-index: 999;
+  display: flex;
+}
+/* ------------------------------------------ */
