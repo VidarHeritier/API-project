@@ -16,22 +16,16 @@ async function fetchNasaData() {
     return [data];
   } catch (error) {
     console.error("Error loading data", error);
+    const errorMess = document.createElement("h5");
+    errorMess.className = "error";
+    errorMess.textContent = "Something went wrong";
+    document.body.append(errorMess);
     return [];
   }
 }
 
 fetchNasaData().then((nasaArray) => {
   const loadingAnim = document.querySelector(".loading");
-
-  // loadingAnim.onreadystatechange = () => {
-  //   if (document.readyState !== "complete") {
-  //     loadingAnim.style.display = "flex";
-  //     console.log("ikke");
-  //   } else {
-  //     loadingAnim.style.display = "none";
-  //     console.log("jq");
-  //   }
-  // };
 
   let today = new Date().toISOString().slice(0, 10);
 
@@ -99,16 +93,23 @@ fetchNasaData().then((nasaArray) => {
     currentDate.setDate(currentDate.getDate() + offset);
     if (currentDate > new Date(calendar.max)) {
       console.error("Legg inn error på et vis");
-      return;
+
+      const errorMessDate = document.createElement("h6");
+      errorMessDate.className = "error-date";
+      errorMessDate.textContent = "Choose a valid date";
+      dateSelectorContainer.prepend(errorMessDate);
     }
     const newDate = currentDate.toISOString().slice(0, 10);
     calendar.value = newDate;
 
     if (!initialLoad) {
-      const rect = image.getBoundingClientRect();
-      console.log(rect);
-      loadingAnim.style.top = rect.top + image.offsetHeight / 2;
-      loadingAnim.style.right = rect.right + image.offsetWidth / 2;
+      const imgRect = image.getBoundingClientRect();
+      const loadingAnimRect = loadingAnim.getBoundingClientRect();
+      const offsetX = (imgRect.width - loadingAnimRect.width) / 2;
+      const offsetY = (imgRect.height - loadingAnimRect.height) / 2;
+
+      loadingAnim.style.left = `${imgRect.left + offsetX}px`;
+      loadingAnim.style.top = `${imgRect.top + offsetY}px`;
 
       loadingAnim.style.display = "flex";
     }
@@ -125,6 +126,7 @@ fetchNasaData().then((nasaArray) => {
       title.textContent = POD.title;
       date.textContent = POD.date;
       image.src = POD.url;
+      image.alt = POD.title;
       description.textContent = POD.explanation;
 
       loadingAnim.style.display = "none";
